@@ -1,0 +1,72 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet" />
+    <title>{% block title %}mi proyecto{% endblock %}</title>
+</head>
+
+<body class="w-full h-full bg-sky-900 flex justify-center items-center">
+    <nav class="navbar navbar-dark bg-dark navbar-expand-lg p-3">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="{% url 'Inicio' %}">Proyecto Abogados</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    {% if user.is_authenticated %}
+                        {% if user.is_superuser %}
+                            <li class="nav-item p-2">
+                                <a class="nav-link mg-2" href="{% url 'DashboardAdmin' %}">Panel</a>
+                            </li>
+                            <li class="nav-item p-2">
+                                <a class="nav-link mg-2" href="{% url 'CrearAbogados' %}">Registrar abogado</a>
+                            </li>
+                        {% else %}
+                        <li class="nav-item p-2">
+                            <a class="nav-link mg-2" href="{% url 'DashboardUser' %}">Panel</a>
+                        </li>
+                        <li class="nav-item p-2">
+                            <a class="nav-link mg-2" href="{% url 'CasosDeUsuarios' user.id %}">Mis casos</a>
+                        </li>
+                        {% endif %}
+                        <li class="nav-item p-2">
+                            <a class="nav-link mg-2" href="{% url 'CerrarSesion' %}" >Cerrar Sesion</a>
+                        </li>
+                    {% else %}
+                        <li class="nav-item p-2">
+                            <a class="nav-link mg-2" href="{% url 'IniciarSesionUsuarios' %}" >iniciar sesión</a>
+                        </li>
+                        <li class="nav-item p-2">
+                            <a class="nav-link mg-2" href="{% url 'RegistroUsuarios' %}" >registrarse</a>
+                        </li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <nav class="ml-8">
+
+
+    </nav>
+
+    <!--SECCION DE CONTENIDOS-->
+    <section>
+        {% block content %}
+        {% endblock %}
+    </section>
+
+    <!--SECCION DEL FOOTER-->
+    <footer>
+
+    </footer>
+    <!--ENLACE CON EL JS-->
+    <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+</body>
+
+</html>

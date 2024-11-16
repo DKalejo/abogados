@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <!-- Card para detalles del abogado -->
+            <div class="card mb-4">
+                <div class="card-header text-center bg-primary text-white">
+                    <h3>Detalles del Abogado</h3>
+                </div>
+                <div class="card-body">
+                    <h4 class="card-title">Abogado: {{ DetallesAbogados.nombre }} {{ DetallesAbogados.apellido }}</h4>
+                    <p class="card-text"><strong>Especialidad:</strong> {{ DetallesAbogados.especialidad }}</p>
+                </div>
+            </div>
+
+            <!-- Casos atendidos -->
+            <div class="card">
+                <div class="card-header bg-secondary text-white text-center">
+                    <h4>Casos que están atendiendo</h4>
+                </div>
+                <div class="card-body">
+                    {% if DetallesCaso %}
+                        {% for item in DetallesCaso %}
+                            <div class="mb-4">
+                                <h5 class="text-primary">{{ item.TipoCaso }}</h5>
+                                <p>{{ item.Descripcion }}</p>
+                                <p><strong>Cliente:</strong> {{ item.Fk_usuario.username }}</p>
+                                <hr>
+                            </div>
+                        {% endfor %}
+                    {% else %}
+                        <p class="text-muted">No hay casos registrados para este abogado.</p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

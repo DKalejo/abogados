@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-4">
+    <h1 class="mb-4">Tus casos</h1>
+
+    {% if CasosDelUsuario %}
+        <div class="list-group">
+            {% for item in CasosDelUsuario %}
+            <div class="list-group-item">
+                <h4 class="mb-2">{{ item.TipoCaso }}</h4>
+                <p class="mb-2">{{ item.Descripcion }}</p>
+                <p><strong>Abogado contratado:</strong> {{ item.Fk_abogado.nombre }} {{ item.Fk_abogado.apellido }}</p>
+                <div class="d-flex justify-content-between">
+                    <a href="{% url 'ActualizarCaso' item.id %}" class="btn btn-warning btn-sm">Editar</a>
+                    <a href="{% url 'BorrarCaso' item.id %}" class="btn btn-danger btn-sm">Borrar caso</a>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <h5 class="text-muted">Sin datos</h5>
+    {% endif %}
+</div>
+{% endblock %}

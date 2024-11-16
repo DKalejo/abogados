@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container mt-5">
+    <div class="row">
+        <!-- Columna Izquierda: Casos -->
+        <div class="col-md-6">
+            <h3 class="text-center mb-4">Casos Registrados</h3>
+            {% if casosLista %}
+                {% for caso in casosLista %}
+                    <div class="card mb-3 shadow-sm">
+                        <div class="card-header bg-primary text-white">
+                            <h5 class="card-title">{{ caso.TipoCaso }}</h5>
+                        </div>
+                        <div class="card-body">
+                            <p><strong>Descripción:</strong> {{ caso.Descripcion }}</p>
+                            <p><strong>Abogado asignado:</strong> {{ caso.Fk_abogado.nombre }} {{ caso.Fk_abogado.apellido }}</p>
+                        </div>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <p class="text-center">No tienes casos registrados actualmente.</p>
+            {% endif %}
+        </div>
+
+        <!-- Columna Derecha: Abogados -->
+        <div class="col-md-6">
+            <h3 class="text-center mb-4">Abogados Disponibles</h3>
+            {% if abogadosLista %}
+                {% for abogado in abogadosLista %}
+                    <div class="card mb-3 shadow-sm">
+                        <div class="card-header bg-success text-white">
+                            <h5 class="card-title">{{ abogado.nombre }} {{ abogado.apellido }}</h5>
+                        </div>
+                        <div class="card-body">
+                            <p><strong>Especialidad:</strong> {{ abogado.especialidad }}</p>
+                            <a href="{% url 'RegistrarCaso' abogado.id %}" class="btn btn-primary">Contratar</a>
+                        </div>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <p class="text-center">No hay abogados disponibles en este momento.</p>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}

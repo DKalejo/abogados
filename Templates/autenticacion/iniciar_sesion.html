@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header text-center">
+                    <h3>Iniciar Sesión</h3>
+                </div>
+                <div class="card-body">
+                    <form method="post">
+                        {% csrf_token %}
+                        
+                        <!-- Campo de nombre de usuario -->
+                        <div class="form-group mb-3">
+                            <label for="nombre">Nombre de usuario</label>
+                            <input type="text" name="nombre" id="nombre" class="form-control" placeholder="Ingresa tu nombre de usuario" required>
+                        </div>
+                        
+                        <!-- Campo de contraseña -->
+                        <div class="form-group mb-3">
+                            <label for="pass">Contraseña</label>
+                            <input type="password" name="pass" id="pass" class="form-control" placeholder="Ingresa tu contraseña" required>
+                        </div>
+                        
+                        <!-- Botón de inicio de sesión -->
+                        <div class="d-grid gap-2">
+                            <button type="submit" class="btn btn-primary">Entrar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
