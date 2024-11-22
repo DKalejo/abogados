@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container mt-5">
+
+    <div class="row">
+        <!-- Columna Central: Divorcios -->
+        <div class="col-md-6">
+            <h3 class="text-center mb-4">Servicios de divorcios registrados</h3>
+            {% if Divorcios %}
+            {% for item in Divorcios %}
+            <div class="card mb-3 shadow-sm">
+                <div class="card-header bg-primary text-white">
+                    <h5 class="card-title">{{ item.nombreServicio }}</h5>
+                </div>
+                <div class="card-body">
+                    <p><strong>Descripción:</strong> {{ item.descripcionServicio }}</p>
+                    <p>Costo: {{ item.costoServicio }}</p>
+                    <p>Duracion estimada: {{item.duracion}}</p>
+                </div>
+                <div class="cad-footer p-4">
+                    <a href="{% url 'ActualizarDivorcios' item.id %}">
+                        <button class="btn btn-primary mt-2">
+                            Actualizar Servicio
+                        </button>
+                    </a>
+                    <a href="{% url 'BorrarDivorcios' item.id %}">
+                        <button class="btn btn-danger mt-2">
+                            Borrar Servicio
+                        </button>
+                    </a>
+                </div>
+            </div>
+            {% endfor %}
+            {% else %}
+            <p class="text-center">No tienes servicios paa divorcios registrados actualmente.</p>
+            {% endif %}
+        </div>
+        <!-- Columna Izquierda: Asesorias -->
+        <div class="col-md-6">
+            <h3 class="text-center mb-4">Asesorias legales registradas</h3>
+            {% if Asesorias %}
+            {% for item in Asesorias %}
+            <div class="card mb-3 shadow-sm">
+                <div class="card-header bg-primary text-white">
+                    <h5 class="card-title">{{ item.nombreServicio }}</h5>
+                </div>
+                <div class="card-body">
+                    <p><strong>Descripción:</strong> {{ item.descripcionServicio }}</p>
+                    <p>Costo: {{ item.costoServicio }}</p>
+                    <p>Especialidad: {{item.especialidad}}</p>
+                </div>
+                <div class="cad-footer p-4">
+                    <a href="{% url 'ActualizarAsesorias' item.id %}">
+                        <button class="btn btn-primary mt-2">
+                            Actualizar Asesoria
+                        </button>
+                    </a>
+                    <a href="{% url 'BorrarAsesorias' item.id %}">
+                        <button class="btn btn-danger mt-2">
+                            Borrar Asesoria
+                        </button>
+                    </a>
+                </div>
+            </div>
+            {% endfor %}
+            {% else %}
+            <p class="text-center">No tienes asesorias registradas actualmente.</p>
+            {% endif %}
+        </div>
+    </div>
+
+</div>
+{% endblock %}

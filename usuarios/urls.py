@@ -1,19 +1,20 @@
 from django.urls import path
 from .views import *
-from juicios.views import * 
 
 urlpatterns = [
     # URL de usuarios normales
     path('accounts/Registrarse/', RegistrosUsuarios, name='RegistroUsuarios'),
     path('accounts/Iniciar Sesion/', InicioSesionUsuarios, name='IniciarSesionUsuarios'),
     path('accounts/Cerrar Sesion/',CerrarSesion, name='CerrarSesion'),
-    path('dashboard/User/',DashboardUser, name='DashboardUser'),
-    path('dashboard/Admin/',DashboardAdmin, name='DashboardAdmin'),
+    path('dashboard/',Dashboard, name='Dashboard'),
 
+    # URL de divorcios
+    path('contratos/divorcios/registrar/', RegistroDivorcios, name = 'RegistrarDivorcios'),
+    path('contratos/divorcios/actualizar/<int:pk>/', ActualizarDivorcios, name='ActualizarDivorcios'),
+    path('contratos/divorcios/borrar/<int:pk>/', BorrarDivorcios, name='BorrarDivorcios'),
 
-    # URL de superAdmin
-    path('crearAbogados/',CrearAbogados,name='CrearAbogados'),
-    path('detallesAbogados/<int:pk>', DetallesAbogados, name='DetallesAbogados'),
-    path('actualizarAbogado/<int:pk>',ActualizarAbogados, name='ActualizarAbogados'),
-    path('borrarAbogado/<int:pk>',BorrarAbogados, name='BorrarAbogados'),    
+    # URL de Asesorias
+    path('contratos/asesorias/registrar/', RegistroAsesorias, name = 'RegistrarAsesorias'),
+    path('contratos/asesorias/actualizar/<int:pk>/', ActualizarAsesorias, name='ActualizarAsesorias'),
+    path('contratos/asesorias/borrar/<int:pk>/', BorrarAsesorias, name='BorrarAsesorias')          
 ]

@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card shadow">
+                <div class="card-header text-center bg-primary text-white">
+                    <h3>Registra tu Asesoria</h3>
+                </div>
+                <div class="card-body">
+                    <form method="post">
+                        {% csrf_token %}
+                        
+                        <!-- Tipo de Caso -->
+                        <div class="form-group mb-3">
+                            <label for="TipoCaso" class="form-label">Nombre de asesoria</label>
+                            <input type="text" id="TipoCaso" name="Servicio" class="form-control" required>
+                        </div>
+
+                        <!-- Resumen del Problema -->
+                        <div class="form-group mb-3">
+                            <label for="Descripcion" class="form-label">Descripcion del servicio</label>
+                            <textarea id="Descripcion" name="Descripcion" rows="5" class="form-control" required></textarea>
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label for="Costo" class="form-label">Costo de la asesoria</label>
+                            <input type="number" name="Costo" id="Costo" class="form-control" required>
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label for="Especialidad" class="form-label">Especialidad</label>
+                            <input type="text" name="Especialidad" class="form-control" id="Especialidad">
+                        </div>
+
+                        <!-- Botón de Guardar -->
+                        <div class="d-grid gap-2">
+                            <button type="submit" class="btn btn-primary">Guardar servicio</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

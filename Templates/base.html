@@ -20,31 +20,25 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
                     {% if user.is_authenticated %}
-                        {% if user.is_superuser %}
-                            <li class="nav-item p-2">
-                                <a class="nav-link mg-2" href="{% url 'DashboardAdmin' %}">Panel</a>
-                            </li>
-                            <li class="nav-item p-2">
-                                <a class="nav-link mg-2" href="{% url 'CrearAbogados' %}">Registrar abogado</a>
-                            </li>
-                        {% else %}
-                        <li class="nav-item p-2">
-                            <a class="nav-link mg-2" href="{% url 'DashboardUser' %}">Panel</a>
-                        </li>
-                        <li class="nav-item p-2">
-                            <a class="nav-link mg-2" href="{% url 'CasosDeUsuarios' user.id %}">Mis casos</a>
-                        </li>
-                        {% endif %}
-                        <li class="nav-item p-2">
-                            <a class="nav-link mg-2" href="{% url 'CerrarSesion' %}" >Cerrar Sesion</a>
-                        </li>
+                    <li class="nav-item p-2">
+                        <a class="nav-link mg-2" href="{% url 'Dashboard' %}">Panel</a>
+                    </li>
+                    <li class="nav-item p-2">
+                        <a class="nav-link mg-2" href="{% url 'RegistrarDivorcios' %}">Registrar servicio para divorcio</a>
+                    </li>
+                    <li class="nav-item p-2">
+                        <a class="nav-link mg-2" href="{% url 'RegistrarAsesorias' %}">Registrar una asesoria legal</a>
+                    </li>
+                    <li class="nav-item p-2">
+                        <a class="nav-link mg-2" href="{% url 'CerrarSesion' %}">Cerrar Sesion</a>
+                    </li>
                     {% else %}
-                        <li class="nav-item p-2">
-                            <a class="nav-link mg-2" href="{% url 'IniciarSesionUsuarios' %}" >iniciar sesión</a>
-                        </li>
-                        <li class="nav-item p-2">
-                            <a class="nav-link mg-2" href="{% url 'RegistroUsuarios' %}" >registrarse</a>
-                        </li>
+                    <li class="nav-item p-2">
+                        <a class="nav-link mg-2" href="{% url 'IniciarSesionUsuarios' %}">iniciar sesión</a>
+                    </li>
+                    <li class="nav-item p-2">
+                        <a class="nav-link mg-2" href="{% url 'RegistroUsuarios' %}">registrarse</a>
+                    </li>
                     {% endif %}
                 </ul>
             </div>

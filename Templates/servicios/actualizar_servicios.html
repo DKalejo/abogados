@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-4">
+    <h1 class="mb-4">Editar Caso</h1>
+    <form method="post">
+        {% csrf_token %}
+        <div class="mb-3">
+            <label for="Servicio" class="form-label">Servicio</label>
+            <input type="text" class="form-control" name="Servicio" value="{{DatosFormulario.nombreServicio}}" id="Servicio" required>
+        </div>
+        <div class="mb3">
+            <label for="Costo">Costo</label>
+            <input type="number" class="form-control" name="Costo" value="{{DatosFormulario.costoServicio}}" id="Costo">
+        </div>
+        <div class="mb-3">
+            <label for="Descripcion" class="form-label">Descripcion de servicio</label>
+            <textarea class="form-control" name="Descripcion" id="Descripcion" rows="4" required>{{DatosFormulario.descripcionServicio}}</textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">Actualizar</button>
+    </form>
+</div>
+{% endblock %}
