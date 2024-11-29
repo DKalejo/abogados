@@ -12,6 +12,10 @@ from django.contrib.auth.decorators import login_required
 # Importacion de manejo de errores
 from django.db import IntegrityError
 
+# REST API
+from rest_framework import viewsets
+from .serializers import DivorciosSerializers, AsesoriasLegalesSerializers
+
 UBICACION_LOGUEO = "../Templates/autenticacion/"
 UBICACION_USUARIOS = "../Templates/usuarios/"
 UBICACION_SERVICIOS = "../Templates/servicios/"
@@ -21,6 +25,13 @@ UBICACION_ASESORIAS = "../Templates/servicios/asesorias/"
 
 # Create your views here
 
+class DivorciosViewSet(viewsets.ModelViewSet):
+    queryset = Divorcio.objects.all()
+    serializer_class = DivorciosSerializers
+
+class AsesoriasLegalesViewSet(viewsets.ModelViewSet):
+    queryset = AsesoriaLegal.objects.all()
+    serializer_class = AsesoriasLegalesSerializers
 
 # Logica para las vistas para el registrar y iniciar
 class VistasUsuario:
@@ -237,7 +248,8 @@ def CerrarSesion(request):
 def Dashboard(request):
     Divorcios = VistaDeDivorcios.ListaDivorcios(Divorcio)
     Asesorias = VistaDeAsesoriasLegales.ListaAsesorias(AsesoriaLegal)
-    return render(request, f"{UBICACION_USUARIOS}dashboard.html", {'Divorcios':Divorcios, 'Asesorias':Asesorias})
+    if (Divorcios != None ) or (Asesorias != None):
+        return render(request, f"{UBICACION_USUARIOS}dashboard.html", {'Divorcios':Divorcios, 'Asesorias':Asesorias})
 
 # VISTAS DE SERVICIOS
 @login_required

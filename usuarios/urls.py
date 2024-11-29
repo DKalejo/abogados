@@ -1,5 +1,14 @@
-from django.urls import path
+from django.urls import path,include
 from .views import *
+from rest_framework import routers
+
+router = routers.DefaultRouter()
+router.register(r'divorcios',DivorciosViewSet, basename='divorcios')
+router.register(r'asesoriasLegales',AsesoriasLegalesViewSet,basename='asesoriasLegales')
+
+
+
+
 
 urlpatterns = [
     # URL de usuarios normales
@@ -16,5 +25,8 @@ urlpatterns = [
     # URL de Asesorias
     path('contratos/asesorias/registrar/', RegistroAsesorias, name = 'RegistrarAsesorias'),
     path('contratos/asesorias/actualizar/<int:pk>/', ActualizarAsesorias, name='ActualizarAsesorias'),
-    path('contratos/asesorias/borrar/<int:pk>/', BorrarAsesorias, name='BorrarAsesorias')          
+    path('contratos/asesorias/borrar/<int:pk>/', BorrarAsesorias, name='BorrarAsesorias'), 
+
+    # API
+    path('api/v1/', include(router.urls))         
 ]

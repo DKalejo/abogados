@@ -4,6 +4,8 @@ from django.db import models
 
 
 class ServicioLegal(models.Model):
+    class Meta:
+        abstract = True
 
     nombreServicio = models.CharField(max_length=255)
     descripcionServicio = models.TextField()
