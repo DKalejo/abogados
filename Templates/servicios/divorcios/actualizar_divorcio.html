@@ -6,7 +6,7 @@
     <form method="post">
         {% csrf_token %}
         <div class="mb-3">
-            <label for="Servicio" class="form-label">Servicio</label>
+            <label for="Servicio" class="form-label">Nombre de servicio</label>
             <input type="text" class="form-control" name="Servicio" value="{{DatosFormulario.nombreServicio}}" id="Servicio" required>
         </div>
         <div class="mb-3">

@@ -97,6 +97,7 @@ class VistaDeServiciosLegales:
                 descripcionServicio=DescripcionFormulario,
                 costoServicio=CostoServicio,
             )
+            
             return f"Servicio registrado exitosamente"
         except IntegrityError:
             return "Error: no se pudo guardar el caso"
@@ -133,17 +134,18 @@ class VistaDeServiciosLegales:
 class VistaDeDivorcios(VistaDeServiciosLegales):
 
     @staticmethod
-    def RegistroDivorcios(request, model):
+    def RegistroServicio(request, model):
         servicio = request.POST['Servicio']
         descripcion = request.POST['Descripcion']
         costo = request.POST['Costo']
         duracion = request.POST['Duracion']
-
+        
+        instance_temporal = model
         try:
             model.objects.create(
                 nombreServicio = servicio,
                 descripcionServicio = descripcion,
-                costoServicio = costo,
+                _costoServicio = costo,
                 duracion = duracion
             )
         except:
@@ -163,7 +165,7 @@ class VistaDeDivorcios(VistaDeServiciosLegales):
         try:
             DivorcioActualizar.nombreServicio = request.POST["Servicio"]
             DivorcioActualizar.descripcionServicio = request.POST["Descripcion"]
-            DivorcioActualizar.costoServicio = request.POST["Costo"]
+            DivorcioActualizar._costoServicio = request.POST["Costo"]
             DivorcioActualizar.duracion = request.POST['Duracion']
             DivorcioActualizar.save()
         except IntegrityError:
@@ -190,7 +192,7 @@ class VistaDeAsesoriasLegales(VistaDeServiciosLegales):
             model.objects.create(
                 nombreServicio = servicio,
                 descripcionServicio = descripcion,
-                costoServicio = costo,
+                _costoServicio = costo,
                 especialidad = especialidad
             )
         except:
@@ -210,7 +212,7 @@ class VistaDeAsesoriasLegales(VistaDeServiciosLegales):
         try:
             AsesoriaActualizar.nombreServicio = request.POST["Servicio"]
             AsesoriaActualizar.descripcionServicio = request.POST["Descripcion"]
-            AsesoriaActualizar.costoServicio = request.POST["Costo"]
+            AsesoriaActualizar._costoServicio = request.POST["Costo"]
             AsesoriaActualizar.especialidad = request.POST['Especialidad']
             AsesoriaActualizar.save()
         except IntegrityError:
@@ -249,7 +251,7 @@ def Dashboard(request):
     Divorcios = VistaDeDivorcios.ListaDivorcios(Divorcio)
     Asesorias = VistaDeAsesoriasLegales.ListaAsesorias(AsesoriaLegal)
     if (Divorcios != None ) or (Asesorias != None):
-        return render(request, f"{UBICACION_USUARIOS}dashboard.html", {'Divorcios':Divorcios, 'Asesorias':Asesorias})
+        return render(request, f"{UBICACION_USUARIOS}dashboard.html", {'Divorcios':Divorcios,'Asesorias':Asesorias})
 
 # VISTAS DE SERVICIOS
 @login_required
@@ -257,7 +259,7 @@ def RegistroDivorcios(request):
     if request.method == 'GET':
         return render(request,f'{UBICACION_DIVORCIOS}registrar_divorcio.html')
     else:
-        VistaDeDivorcios.RegistroDivorcios(request,Divorcio)
+        VistaDeDivorcios.RegistroServicio(request,Divorcio)
         return redirect('Dashboard')
 
 @login_required

@@ -13,9 +13,7 @@
                     <h5 class="card-title">{{ item.nombreServicio }}</h5>
                 </div>
                 <div class="card-body">
-                    <p><strong>Descripción:</strong> {{ item.descripcionServicio }}</p>
-                    <p>Costo: {{ item.costoServicio }}</p>
-                    <p>Duracion estimada: {{item.duracion}}</p>
+                    <p><strong>Descripción:</strong> {{item.MostrarInformacion}}</p>
                 </div>
                 <div class="cad-footer p-4">
                     <a href="{% url 'ActualizarDivorcios' item.id %}">
